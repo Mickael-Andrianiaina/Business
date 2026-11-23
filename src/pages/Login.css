@@ -1,0 +1,928 @@
+.login-page {
+  /* Échelle de l'animation hero (modifiée par les media queries plus bas) */
+  --hero-scale: 1;
+
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #09090b;
+  padding-top: max(clamp(0.5rem, 2dvh, 1.5rem), env(safe-area-inset-top));
+  padding-bottom: max(clamp(0.5rem, 2dvh, 1.5rem), env(safe-area-inset-bottom));
+  padding-left: max(clamp(0.85rem, 3.5vw, 1.5rem), env(safe-area-inset-left));
+  padding-right: max(clamp(0.85rem, 3.5vw, 1.5rem), env(safe-area-inset-right));
+  position: relative;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+}
+
+.login-page *,
+.login-page *::before,
+.login-page *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Conteneur d'ajustement automatique à l'écran ---------- */
+.fit-viewport {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fit-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transform-origin: center center;
+}
+
+.screen-fade-in {
+  animation: screenAppear 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.welcome-leaving {
+  opacity: 0;
+  transform: translateY(-18px) scale(0.95);
+  filter: blur(8px);
+  transition:
+    opacity 0.34s cubic-bezier(0.32, 0, 0.67, 0),
+    transform 0.36s cubic-bezier(0.32, 0, 0.67, 0),
+    filter 0.32s ease;
+  pointer-events: none;
+}
+
+.welcome-leaving .icloud-pop-icon,
+.welcome-leaving .icloud-pop-center {
+  transform: translate(0px, 0px) scale(0.4) !important;
+  opacity: 0 !important;
+  transition: transform 0.32s cubic-bezier(0.32, 0, 0.67, 0), opacity 0.25s ease !important;
+}
+
+@keyframes screenAppear {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes smoothRiseIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.stagger-1 {
+  animation: smoothRiseIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.04s backwards;
+}
+
+.stagger-2 {
+  animation: smoothRiseIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.14s backwards;
+}
+
+.stagger-3 {
+  animation: smoothRiseIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.24s backwards;
+}
+
+/* ---------- ÉCRAN 1 : ACCUEIL ---------- */
+.welcome-screen {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 34rem;
+}
+
+/* La scène hero est dessinée sur une base de 14.5rem puis mise à l'échelle.
+   La place réservée dans la page suit la même échelle. */
+.icloud-hero-stage {
+  position: relative;
+  flex-shrink: 0;
+  width: calc(14.5rem * var(--hero-scale));
+  height: calc(14.5rem * var(--hero-scale));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(0.3rem, 1.2dvh, 0.85rem);
+}
+
+.icloud-scene-group {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14.5rem;
+  height: 14.5rem;
+  margin: -7.25rem 0 0 -7.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(var(--hero-scale));
+  transform-origin: center center;
+}
+
+.icloud-pop-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  animation: icloudSatellitePop 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes icloudSatellitePop {
+  0% {
+    opacity: 0;
+    transform: translate(0px, 0px) scale(0.2);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(calc(var(--tx) * 1.06), calc(var(--ty) * 1.06)) scale(1.04);
+  }
+  30%, 76% {
+    opacity: 1;
+    transform: translate(var(--tx), var(--ty)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0px, 0px) scale(0.25);
+  }
+}
+
+.icloud-pop-center {
+  position: relative;
+  z-index: 10;
+  width: 6.4rem;
+  height: 6.4rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #ffffff;
+  animation: icloudCenterBounce 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes icloudCenterBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.45);
+  }
+  18% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  28%, 78% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+}
+
+.icloud-brand-final {
+  width: 8.6rem;
+  height: 8.6rem;
+  border-radius: 2rem;
+  background: linear-gradient(135deg, #2563eb 0%, #6366f1 55%, #a855f7 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #ffffff;
+  box-shadow: 0 22px 45px rgba(99, 102, 241, 0.32);
+  animation: icloudBrandReveal 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes icloudBrandReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+  22% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  32%, 82% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+
+.welcome-title {
+  font-size: clamp(1.7rem, min(8vw, 5.6dvh), 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: #09090b;
+  margin: 0;
+  line-height: 1.05;
+}
+
+.welcome-title span {
+  background: linear-gradient(90deg, #2563eb 0%, #6366f1 55%, #d946ef 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.welcome-cta {
+  margin-top: clamp(0.6rem, 2.2dvh, 1.5rem);
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  color: #ffffff;
+  font-size: clamp(0.92rem, 2.5vw, 1.02rem);
+  font-weight: 600;
+  padding: clamp(0.6rem, 1.5dvh, 0.85rem) 2.2rem;
+  min-height: 2.75rem;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(79, 70, 229, 0.3);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, filter 0.2s ease;
+}
+
+.welcome-cta:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 16px 32px rgba(79, 70, 229, 0.38);
+  transform: scale(1.04);
+}
+
+.welcome-cta:active {
+  transform: scale(0.96);
+}
+
+.welcome-subtitle {
+  margin-top: clamp(0.6rem, 2.2dvh, 1.65rem);
+  font-size: clamp(0.88rem, min(4.2vw, 2.7dvh), 1.22rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #18181b;
+  max-width: 26rem;
+  padding-inline: 0.5rem;
+}
+
+/* ---------- ÉCRAN 2 : FORMULAIRE DE CONNEXION ---------- */
+.login-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 27.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: clamp(0.4rem, 1.6dvh, 1.25rem);
+}
+
+.apple-logo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(5.5rem, 24dvh, 15rem);
+  height: clamp(5.5rem, 24dvh, 15rem);
+  margin-bottom: 0.1rem;
+  user-select: none;
+}
+
+.apple-logo-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.apple-logo-halo {
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.22), rgba(56, 189, 248, 0.12), transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+/* Le badge et l'icône Apple suivent la taille du logo */
+.apple-logo-badge {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36%;
+  height: 36%;
+  border-radius: 0.95rem;
+  background: #ffffff;
+  border: 1.5px solid rgba(79, 70, 229, 0.22);
+  color: #2563eb;
+  box-shadow: 0 12px 26px rgba(79, 70, 229, 0.14);
+}
+
+.apple-logo-badge svg {
+  width: 70%;
+  height: 70%;
+}
+
+.login-header h1 {
+  font-size: clamp(1.25rem, min(4.5vw, 3.8dvh), 1.8rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #09090b;
+  margin: 0.15rem 0 0;
+  line-height: 1.1;
+}
+
+.login-header h1 span {
+  background: linear-gradient(90deg, #2563eb 0%, #6366f1 60%, #d946ef 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.login-header p {
+  color: #52525b;
+  font-size: clamp(0.74rem, min(2.2vw, 2.3dvh), 0.86rem);
+  margin: 0.25rem 0 0;
+}
+
+.login-card {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 1.1rem;
+  padding: clamp(0.8rem, 2.4dvh, 1.5rem) clamp(1rem, 3.5vw, 1.65rem);
+  box-shadow: 0 18px 36px -16px rgba(9, 9, 11, 0.08);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.5dvh, 1rem);
+}
+
+.login-field label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #27272a;
+  margin-bottom: 0.3rem;
+}
+
+.password-label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.password-label label {
+  margin-bottom: 0;
+}
+
+.password-label a {
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.password-label a:hover {
+  color: #2563eb;
+}
+
+.login-input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.icon-mail {
+  color: #2563eb;
+}
+
+.icon-lock {
+  color: #6366f1;
+}
+
+.login-input-wrapper input {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid #e4e4e7;
+  border-radius: 0.7rem;
+  padding: clamp(0.5rem, 1.2dvh, 0.7rem) 2.75rem;
+  color: #09090b;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-input-wrapper input::placeholder {
+  color: #a1a1aa;
+}
+
+.login-input-wrapper input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.45rem;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 2rem;
+  min-height: 2rem;
+  background: transparent;
+  border: none;
+  color: #71717a;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.password-toggle:hover {
+  color: #4f46e5;
+}
+
+.remember-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: #52525b;
+  cursor: pointer;
+}
+
+.remember-label input {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+  accent-color: #4f46e5;
+}
+
+.login-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 55%, #7c3aed 100%);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: clamp(0.55rem, 1.3dvh, 0.76rem) 1rem;
+  border: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  box-shadow: 0 12px 26px -6px rgba(79, 70, 229, 0.36);
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.login-submit:hover {
+  filter: brightness(1.06);
+}
+
+.login-submit:active {
+  transform: scale(0.99);
+}
+
+.login-register {
+  text-align: center;
+  margin-top: clamp(0.55rem, 1.8dvh, 1.25rem);
+  font-size: 0.82rem;
+  color: #71717a;
+}
+
+.login-register a {
+  color: #4f46e5;
+  margin-left: 0.35rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-register a:hover {
+  color: #2563eb;
+}
+
+.login-security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: clamp(0.45rem, 1.4dvh, 1rem);
+  font-size: 0.75rem;
+  color: #52525b;
+}
+
+.security-icon {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+/* ---- Grands écrans : tablette portrait, ordinateur ---- */
+@media (min-width: 700px) and (min-height: 820px) {
+  .login-page {
+    --hero-scale: 1.15;
+  }
+
+  .login-wrapper {
+    max-width: 30rem;
+  }
+
+  .login-field label,
+  .remember-label,
+  .login-register {
+    font-size: 0.9rem;
+  }
+
+  .password-label a {
+    font-size: 0.8rem;
+  }
+
+  .login-input-wrapper input {
+    font-size: 1rem;
+  }
+
+  .login-submit {
+    font-size: 1rem;
+  }
+
+  .login-security {
+    font-size: 0.82rem;
+  }
+}
+
+@media (min-width: 1100px) and (min-height: 940px) {
+  .login-page {
+    --hero-scale: 1.3;
+  }
+}
+
+/* ---- Écrans de plus en plus courts (portrait ou fenêtre réduite) ---- */
+@media (max-height: 760px) {
+  .login-page {
+    --hero-scale: 0.9;
+  }
+}
+
+@media (max-height: 660px) {
+  .login-page {
+    --hero-scale: 0.8;
+  }
+
+  .login-field label {
+    margin-bottom: 0.2rem;
+  }
+}
+
+@media (max-height: 640px) {
+  .login-card {
+    padding: 0.8rem 1.1rem;
+  }
+
+  .login-form {
+    gap: 0.45rem;
+  }
+}
+
+@media (max-height: 580px) {
+  .login-page {
+    --hero-scale: 0.68;
+  }
+}
+
+@media (max-height: 500px) {
+  .login-page {
+    --hero-scale: 0.56;
+  }
+}
+
+@media (max-height: 430px) {
+  .login-page {
+    --hero-scale: 0.46;
+  }
+}
+
+/* ---- Petite largeur ---- */
+@media (max-width: 600px) {
+  /* 16px minimum : évite le zoom automatique d'iOS quand on touche un champ */
+  .login-input-wrapper input {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-cta {
+    width: 100%;
+    max-width: 16.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-card {
+    padding-inline: 0.85rem;
+  }
+
+  .login-input-wrapper input {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* ---- Très petits téléphones (320px) ---- */
+@media (max-width: 340px) {
+  .login-wrapper,
+  .welcome-screen {
+    max-width: 100%;
+  }
+
+  .login-card {
+    border-radius: 0.9rem;
+    padding-inline: 0.75rem;
+  }
+
+  .login-register {
+    font-size: 0.78rem;
+  }
+
+  .welcome-title {
+    font-size: 1.6rem;
+  }
+}
+
+/* ---- Paysage : deux colonnes (téléphone en paysage, petite fenêtre large) ---- */
+@media (min-aspect-ratio: 6/5) and (max-height: 600px) {
+  .login-page {
+    --hero-scale: 0.85;
+  }
+
+  /* Accueil : animation à gauche, texte à droite */
+  .welcome-screen {
+    max-width: 46rem;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    grid-template-areas:
+      "hero ."
+      "hero title"
+      "hero cta"
+      "hero sub"
+      "hero .";
+    column-gap: clamp(1rem, 5vw, 3rem);
+    justify-items: center;
+    align-items: center;
+  }
+
+  .welcome-screen .icloud-hero-stage {
+    grid-area: hero;
+    margin: 0;
+  }
+
+  .welcome-title {
+    grid-area: title;
+  }
+
+  .welcome-cta {
+    grid-area: cta;
+    width: auto;
+    max-width: none;
+    margin-top: 0.7rem;
+  }
+
+  .welcome-subtitle {
+    grid-area: sub;
+    margin-top: 0.6rem;
+  }
+
+}
+
+@media (min-aspect-ratio: 6/5) and (max-height: 440px) {
+  .login-page {
+    --hero-scale: 0.7;
+  }
+}
+
+@media (min-aspect-ratio: 6/5) and (max-height: 360px) {
+  .login-page {
+    --hero-scale: 0.55;
+  }
+}
+
+/* ---- Paysage très court : on garde l'essentiel ---- */
+@media (max-height: 420px) {
+  .login-header p,
+  .login-security {
+    display: none;
+  }
+}
+
+/* ---- Écran large mais bas (paysage : téléphone, tablette, petit portable) ----
+   La carte reste la même que sur la capture, mais elle passe sur
+   2 colonnes : logo + titre à gauche, formulaire à droite. */
+@media (min-aspect-ratio: 6/5) and (max-height: 820px) {
+  .login-wrapper {
+    max-width: 50rem;
+  }
+
+  .login-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-areas:
+      "header form"
+      "header register";
+    column-gap: clamp(1rem, 4vw, 2.5rem);
+    align-items: center;
+    padding-inline: clamp(1.1rem, 3vw, 2rem);
+  }
+
+  .login-header {
+    grid-area: header;
+    margin: 0;
+  }
+
+  .login-form {
+    grid-area: form;
+  }
+
+  .login-register {
+    grid-area: register;
+  }
+
+  .apple-logo {
+    width: clamp(6rem, 42dvh, 15rem);
+    height: clamp(6rem, 42dvh, 15rem);
+  }
+}
+
+/* ---- Portrait / grand écran haut : carte large comme sur la capture ---- */
+@media (min-width: 700px) and (min-height: 820px) {
+  .login-wrapper {
+    max-width: 35rem;
+  }
+
+  .apple-logo {
+    width: clamp(10rem, 30dvh, 18rem);
+    height: clamp(10rem, 30dvh, 18rem);
+  }
+
+  .login-header h1 {
+    font-size: clamp(1.8rem, 4.2dvh, 2.6rem);
+  }
+
+  .login-header p {
+    font-size: clamp(0.95rem, 2.1dvh, 1.1rem);
+  }
+
+  .login-card {
+    padding: clamp(1.25rem, 3dvh, 2rem) clamp(1.5rem, 4vw, 2.5rem);
+  }
+}
+
+/* ---- Écrans très larges / TV : tout est en rem, donc tout grossit ---- */
+@media (min-width: 1600px) and (min-height: 900px) {
+  .login-page {
+    font-size: 18px;
+  }
+}
+
+/* ---- Tactile : cibles plus grandes ---- */
+@media (pointer: coarse) {
+  .password-toggle {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    right: 0.2rem;
+  }
+
+  .remember-label {
+    min-height: 2.75rem;
+  }
+
+  .remember-label input {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .password-label a,
+  .login-register a {
+    display: inline-block;
+    padding: 0.4rem 0;
+  }
+}
+
+/* ---- Pas de survol (tactile) : évite les effets hover « collants » ---- */
+@media (hover: none) {
+  .welcome-cta:hover,
+  .login-submit:hover {
+    filter: none;
+    transform: none;
+  }
+
+  .welcome-cta:hover {
+    box-shadow: 0 12px 28px rgba(79, 70, 229, 0.3);
+  }
+}
+
+/* ---- Mouvement réduit ---- */
+@media (prefers-reduced-motion: reduce) {
+  .screen-fade-in,
+  .stagger-1,
+  .stagger-2,
+  .stagger-3,
+  .icloud-pop-icon,
+  .icloud-pop-center,
+  .icloud-brand-final,
+  .sn-ring-enter,
+  .sn-wheel-rotate {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Animation du logo à points ---------- */
+@keyframes snAppleExpand {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes snAppleSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sn-ring-enter {
+  transform-origin: 80px 80px;
+  animation: snAppleExpand 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.sn-wheel-rotate {
+  transform-origin: 80px 80px;
+  animation: snAppleSpin 48s linear infinite;
+}

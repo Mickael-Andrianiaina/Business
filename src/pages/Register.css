@@ -1,0 +1,398 @@
+/* ================================
+   REGISTER PAGE
+================================ */
+
+.register-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Repli puis marges fluides + zones sûres (iPhone à encoche) */
+  padding: 32px 20px;
+  padding-top: max(clamp(10px, 2.5dvh, 32px), env(safe-area-inset-top));
+  padding-bottom: max(clamp(10px, 2.5dvh, 32px), env(safe-area-inset-bottom));
+  padding-left: max(clamp(12px, 4vw, 20px), env(safe-area-inset-left));
+  padding-right: max(clamp(12px, 4vw, 20px), env(safe-area-inset-right));
+  position: relative;
+  overflow-x: hidden;
+  background: #ffffff;
+  color: #1d1d1f;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+}
+
+.register-container *,
+.register-container *::before,
+.register-container *::after {
+  box-sizing: border-box;
+}
+
+/* ================================
+   ANIMATED BACKGROUND
+================================ */
+
+/* Halo fixe, centré dans l'écran : il ne peut jamais créer de scroll */
+.register-container::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(500px, 90vw);
+  height: min(500px, 90vw);
+  background: radial-gradient(
+    circle,
+    rgba(0, 122, 255, 0.11) 0%,
+    rgba(175, 82, 222, 0.06) 45%,
+    rgba(255, 149, 0, 0.03) 70%,
+    transparent 80%
+  );
+  filter: blur(42px);
+  animation: registerGlow 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes registerGlow {
+  from {
+    transform: translate(-45px, -30px) scale(0.92);
+  }
+  to {
+    transform: translate(45px, 30px) scale(1.18);
+  }
+}
+
+/* ================================
+   REGISTER CARD
+================================ */
+
+.register-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  padding: 36px 32px;
+  padding: clamp(18px, 4dvh, 36px) clamp(18px, 6vw, 32px);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(29, 29, 31, 0.07);
+  border-radius: 26px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 122, 255, 0.04);
+  backdrop-filter: blur(18px);
+  animation: appleAppear 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ================================
+   TITLE
+================================ */
+
+.register-card h1 {
+  margin: 0 0 10px;
+  margin-bottom: clamp(4px, 1.2dvh, 10px);
+  color: #1d1d1f;
+  font-size: 31px;
+  font-size: clamp(22px, min(7.4vw, 4.6dvh), 31px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.register-card h1 span {
+  background: linear-gradient(135deg, #007aff, #5856d6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.register-card > p {
+  margin: 0 0 26px;
+  margin-bottom: clamp(12px, 3dvh, 26px);
+  color: #6e6e73;
+  font-size: 14px;
+  font-size: clamp(12.5px, 2dvh, 14px);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ================================
+   FORM
+================================ */
+
+.register-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  gap: clamp(2px, 0.8dvh, 8px);
+}
+
+.register-card label {
+  margin-top: 10px;
+  margin-top: clamp(4px, 1.2dvh, 10px);
+  color: #1d1d1f;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.register-card input {
+  width: 100%;
+  padding: 14px 16px;
+  padding: clamp(9px, 1.7dvh, 14px) 16px;
+  color: #1d1d1f;
+  background: #f5f5f7;
+  border: 1px solid rgba(29, 29, 31, 0.1);
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.register-card input::placeholder {
+  color: #98989d;
+}
+
+.register-card input:hover {
+  border-color: rgba(0, 122, 255, 0.35);
+  background: #fafafa;
+}
+
+.register-card input:focus {
+  border-color: #007aff;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.12);
+}
+
+/* ================================
+   REGISTER BUTTON
+================================ */
+
+.register-card button {
+  width: 100%;
+  margin-top: 20px;
+  margin-top: clamp(12px, 2.4dvh, 20px);
+  padding: 15px 18px;
+  padding: clamp(11px, 1.9dvh, 15px) 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #007aff 0%, #0056d6 100%);
+  border: none;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(0, 122, 255, 0.24);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.2s ease;
+}
+
+.register-card button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 14px 28px rgba(0, 122, 255, 0.32);
+}
+
+.register-card button:hover svg {
+  transform: translateX(3px);
+}
+
+.register-card button svg {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.register-card button:active {
+  transform: scale(0.985);
+}
+
+.register-card button:focus-visible {
+  outline: 3px solid rgba(0, 122, 255, 0.35);
+  outline-offset: 3px;
+}
+
+/* ================================
+   LOGIN LINK
+================================ */
+
+.register-card .login-link {
+  margin: 24px 0 0;
+  margin-top: clamp(12px, 2.8dvh, 24px);
+  padding-top: 20px;
+  padding-top: clamp(10px, 2.2dvh, 20px);
+  border-top: 1px solid rgba(29, 29, 31, 0.08);
+  color: #6e6e73;
+  font-size: 13px;
+  text-align: center;
+}
+
+.login-link a {
+  color: #007aff;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: color 0.2s ease;
+}
+
+.login-link a:hover {
+  color: #0056d6;
+  text-decoration: underline;
+}
+
+/* ================================
+   ANIMATION
+================================ */
+
+@keyframes appleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+/* ---- Grands écrans : tablette, ordinateur ---- */
+@media (min-width: 900px) and (min-height: 760px) {
+  .register-card {
+    max-width: 460px;
+  }
+
+  .register-card h1 {
+    font-size: 34px;
+  }
+
+  .register-card > p {
+    font-size: 15px;
+  }
+
+  .register-card label {
+    font-size: 14px;
+  }
+
+  .register-card input {
+    font-size: 15px;
+  }
+
+  .register-card button {
+    font-size: 16px;
+  }
+
+  .register-card .login-link {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1280px) and (min-height: 900px) {
+  .register-card {
+    max-width: 500px;
+    padding: 44px 40px;
+  }
+
+  .register-card input {
+    padding: 16px 18px;
+  }
+
+  .register-card button {
+    padding: 17px 20px;
+  }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 600px) {
+  /* 16px minimum : évite le zoom automatique d'iOS quand on touche un champ */
+  .register-card input {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-card {
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 360px) {
+  .register-card {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .register-card input {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+/* ---- Paysage (téléphone couché, fenêtre large et basse) :
+        les champs passent en deux colonnes ---- */
+@media (min-aspect-ratio: 6/5) and (max-height: 620px) {
+  .register-card {
+    max-width: 640px;
+    padding: clamp(12px, 3dvh, 20px) 24px;
+  }
+
+  .register-card > p {
+    margin-bottom: 8px;
+  }
+
+  .register-card form {
+    display: block;
+    column-count: 2;
+    column-gap: 24px;
+  }
+
+  .register-card label {
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    break-after: avoid;
+    break-after: avoid-column;
+  }
+
+  .register-card input {
+    break-inside: avoid;
+  }
+
+  .register-card button {
+    column-span: all;
+    margin-top: 12px;
+  }
+
+  .register-card .login-link {
+    margin-top: 10px;
+    padding-top: 8px;
+  }
+}
+
+/* ================================
+   ACCESSIBILITY
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .register-container::before,
+  .register-card {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
