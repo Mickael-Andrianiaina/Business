@@ -1,0 +1,544 @@
+
+/* ==========================================
+   BIZINA IPHONE - ADMIN V7
+   ACTIVITY LOGS & AUDIT CENTER
+========================================== */
+
+.av7 {
+  --av7-blue: #0071e3;
+  --av7-text: #1d1d1f;
+  --av7-muted: #86868b;
+  --av7-border: #e8e8ed;
+  --av7-surface: #f5f5f7;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.av7-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.av7-primary {
+  background: var(--av7-blue);
+  color: #ffffff;
+}
+
+.av7-primary:hover {
+  background: #0066cc;
+}
+
+/* ==========================================
+   BANNIERE
+========================================== */
+
+.av7-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+
+  gap: 24px;
+  padding: 32px;
+  margin-bottom: 24px;
+
+  border-radius: 22px;
+
+  background: linear-gradient(
+    125deg,
+    #101828,
+    #263653,
+    #354d75
+  );
+
+  color: #ffffff;
+}
+
+.av7-banner small {
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 1.6px;
+  color: #a9c7ff;
+}
+
+.av7-banner h2 {
+  margin: 14px 0 10px;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 650;
+  letter-spacing: -1px;
+}
+
+.av7-banner p {
+  max-width: 520px;
+  color: #cbd5e1;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.av7-banner-icon {
+  flex-shrink: 0;
+  color: #ffffff35;
+}
+
+.av7-banner-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 15px;
+  padding: 9px 13px;
+
+  border: 1px solid #ffffff20;
+  border-radius: 9px;
+
+  background: #ffffff10;
+
+  color: #b6f1c3;
+  font-size: 11px;
+}
+
+/* ==========================================
+   STATISTIQUES
+========================================== */
+
+.av7-stats-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* ==========================================
+   FILTRES
+========================================== */
+
+.av7-filter-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.av7-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.av7-field label {
+  color: #737378;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.av7-field select,
+.av7-field input {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+
+  padding: 11px 12px;
+
+  background: var(--av7-surface);
+  color: var(--av7-text);
+
+  border: 1px solid var(--av7-border);
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.av7-field select:focus,
+.av7-field input:focus {
+  outline: none;
+
+  border-color: var(--av7-blue);
+  box-shadow: 0 0 0 3px #0071e320;
+}
+
+/* ==========================================
+   TABLEAU
+========================================== */
+
+.av7-table {
+  min-width: 880px;
+}
+
+.av7-event {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.av7-event > div:last-child {
+  min-width: 0;
+}
+
+.av7-event strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.av7-event small {
+  display: block;
+  margin-top: 5px;
+  color: var(--av7-muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.av7-event-icon {
+  display: grid;
+  place-items: center;
+
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+}
+
+/* ==========================================
+   COULEURS PAR GRAVITE
+========================================== */
+
+.av7-event-icon.info {
+  background: #eaf3ff;
+  color: #0071e3;
+}
+
+.av7-event-icon.success {
+  background: #e9f8ed;
+  color: #218739;
+}
+
+.av7-event-icon.warning {
+  background: #fff3e2;
+  color: #a65e00;
+}
+
+.av7-event-icon.critical {
+  background: #fff0ef;
+  color: #b42318;
+}
+
+.av7-severity {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+  padding: 6px 10px;
+
+  border-radius: 8px;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+.av7-severity-dot {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+}
+
+.av7-severity.info {
+  color: #175ac6;
+  background: #eaf3ff;
+}
+
+.av7-severity.success {
+  color: #218739;
+  background: #e9f8ed;
+}
+
+.av7-severity.warning {
+  color: #a65e00;
+  background: #fff3e2;
+}
+
+.av7-severity.critical {
+  color: #b42318;
+  background: #fff0ef;
+}
+
+/* ==========================================
+   AUTEUR
+========================================== */
+
+.av7-actor {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 12px;
+  color: #5e5e66;
+}
+
+/* ==========================================
+   SECURITE
+========================================== */
+
+.av7-security-note {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 13px;
+
+  margin-top: 24px;
+  padding: 20px;
+
+  border: 1px solid var(--av7-border);
+  border-radius: 16px;
+
+  background: #ffffff;
+}
+
+.av7-security-note > svg {
+  flex-shrink: 0;
+  color: #218739;
+}
+
+.av7-security-note strong {
+  color: var(--av7-text);
+  font-size: 14px;
+}
+
+.av7-security-note p {
+  margin: 6px 0 0;
+  color: #737378;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   MODALE
+========================================== */
+
+.av7-modal {
+  width: min(100%, 740px);
+}
+
+.av7-detail-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  padding: 24px;
+  margin-bottom: 24px;
+
+  border-radius: 16px;
+  background: var(--av7-surface);
+
+  text-align: center;
+}
+
+.av7-detail-banner > svg {
+  color: var(--av7-blue);
+}
+
+.av7-detail-banner h3 {
+  margin: 0;
+  color: var(--av7-text);
+  font-size: 21px;
+  letter-spacing: -0.6px;
+}
+
+/* ==========================================
+   INFORMATIONS DETAILLEES
+========================================== */
+
+.av7-detail-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.av7-detail-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+  min-width: 0;
+  padding: 15px;
+
+  border: 1px solid var(--av7-border);
+  border-radius: 12px;
+}
+
+.av7-detail-item small {
+  color: var(--av7-muted);
+  font-size: 11px;
+}
+
+.av7-detail-item strong {
+  color: var(--av7-text);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   IDENTIFIANTS
+========================================== */
+
+.av7-identifiers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 16px;
+  margin-bottom: 24px;
+
+  background: #f5f5f7;
+  border-radius: 13px;
+}
+
+.av7-identifiers small {
+  color: #86868b;
+  font-size: 11px;
+}
+
+.av7-identifiers code {
+  font-size: 12px;
+  color: #3a3a3c;
+  overflow-wrap: anywhere;
+  margin-bottom: 8px;
+}
+
+/* ==========================================
+   DONNEES JSON
+========================================== */
+
+.av7-json-section {
+  margin-bottom: 24px;
+}
+
+.av7-json-section h3 {
+  margin: 0 0 14px;
+  font-size: 15px;
+}
+
+.av7-json-section pre {
+  max-height: 300px;
+  overflow: auto;
+
+  margin: 0;
+  padding: 18px;
+
+  background: #172033;
+  color: #b7d8ff;
+
+  border-radius: 13px;
+
+  font-family:
+    Consolas,
+    Monaco,
+    monospace;
+
+  font-size: 12px;
+  line-height: 1.8;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1250px) {
+
+  .av7-stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .av7-filter-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .av7-filter-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .av7-header-actions {
+    width: 100%;
+  }
+
+  .av7-header-actions > button {
+    flex: 1;
+  }
+
+  .av7-banner {
+    padding: 23px;
+    border-radius: 17px;
+  }
+
+  .av7-banner-icon {
+    display: none;
+  }
+
+  .av7-stats-grid {
+    gap: 10px;
+  }
+
+  .av7-filter-grid {
+    gap: 10px;
+  }
+
+  .av7-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .av7-detail-banner {
+    padding: 18px;
+  }
+
+  .av7-json-section pre {
+    font-size: 11px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .av7 * {
+    transition: none;
+  }
+
+}

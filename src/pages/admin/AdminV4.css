@@ -1,0 +1,362 @@
+
+/* ========================================
+   BIZINA IPHONE - ADMIN V4
+   CATALOGUE APPLE
+======================================== */
+
+.av4 {
+  --av4-blue: #007aff;
+  --av4-text: #1d1d1f;
+  --av4-muted: #86868b;
+  --av4-border: #e8e8ed;
+  --av4-surface: #f5f5f7;
+}
+
+/* HEADER */
+
+.av4-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.av4-btn-primary {
+  background: var(--av4-blue);
+  color: #fff;
+}
+
+.av4-btn-primary:hover {
+  background: #0066d6;
+}
+
+/* STATISTIQUES */
+
+.av4-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+/* ONGLETS */
+
+.av4-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.av4-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 10px;
+  min-width: 0;
+  background: #fff;
+  border: 1px solid var(--av4-border);
+  border-radius: 15px;
+  color: #73737b;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.av4-tab:hover {
+  border-color: #a9cfff;
+  color: var(--av4-blue);
+  transform: translateY(-2px);
+}
+
+.av4-tab.active {
+  background: #eaf3ff;
+  border-color: #a8cfff;
+  color: var(--av4-blue);
+}
+
+/* GRILLE CATALOGUE */
+
+.av4-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.av4-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 190px;
+  padding: 18px;
+  border: 1px solid var(--av4-border);
+  background: #fff;
+  border-radius: 16px;
+  transition: 0.25s ease;
+}
+
+.av4-item:hover {
+  border-color: #c8dfff;
+  box-shadow: 0 8px 26px #00000008;
+  transform: translateY(-2px);
+}
+
+.av4-item.inactive {
+  background: #fafafa;
+}
+
+.av4-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.av4-item-icon {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: #f1f5fb;
+  color: #007aff;
+  border-radius: 15px;
+}
+
+.av4-color-preview {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid #00000015;
+  box-shadow: inset 0 0 10px #00000008;
+}
+
+.av4-item h3 {
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--av4-text);
+  letter-spacing: -0.4px;
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.av4-item > small {
+  color: var(--av4-muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.av4-item > p {
+  color: #73737b;
+  line-height: 1.6;
+  font-size: 12px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+
+.av4-item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.av4-item-footer > small {
+  color: var(--av4-muted);
+  font-size: 11px;
+}
+
+.av4-inactive {
+  background: #eeeef0;
+  color: #74747a;
+}
+
+/* FORMULAIRES */
+
+.av4-fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.av4-select,
+.av4-input {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--av4-border);
+  border-radius: 11px;
+  font-size: 13px;
+  background: var(--av4-surface);
+  color: var(--av4-text);
+}
+
+.av4-fieldset .av4-select,
+.av4-fieldset .av4-input {
+  width: 100%;
+}
+
+.av4-select:focus,
+.av4-input:focus {
+  outline: none;
+  border-color: var(--av4-blue);
+  box-shadow: 0 0 0 3px #007aff18;
+}
+
+/* COLOR PICKER */
+
+.av4-color-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.av4-color-field input[type="color"] {
+  width: 60px;
+  height: 46px;
+  flex-shrink: 0;
+  border: 1px solid var(--av4-border);
+  border-radius: 10px;
+  background: #fff;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.av4-color-field .av4-input {
+  flex: 1;
+}
+
+/* SWITCH APPLE */
+
+.av4-switch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  background: var(--av4-surface);
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 22px;
+  cursor: pointer;
+}
+
+.av4-switch-row strong {
+  display: block;
+  font-size: 13px;
+}
+
+.av4-switch-row small {
+  display: block;
+  font-size: 11px;
+  color: var(--av4-muted);
+  margin-top: 5px;
+}
+
+.av4-switch-row input {
+  appearance: none;
+  position: relative;
+  width: 48px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: #d1d1d6;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.av4-switch-row input::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 3px;
+  left: 3px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px #00000020;
+  transition: transform 0.25s ease;
+}
+
+.av4-switch-row input:checked {
+  background: #34c759;
+}
+
+.av4-switch-row input:checked::before {
+  transform: translateX(20px);
+}
+
+.av4-switch-row input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* CONFIRMATION */
+
+.av4-notice {
+  background: #f0f5ff;
+  border: 1px solid #dce8ff;
+  padding: 16px;
+  border-radius: 12px;
+  color: #175ac6;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1200px) {
+  .av4-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .av4-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .av4-catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .av4-header-actions {
+    width: 100%;
+  }
+
+  .av4-header-actions > button {
+    flex: 1;
+  }
+
+  .av4-stats-grid {
+    gap: 10px;
+  }
+
+  .av4-tabs {
+    gap: 8px;
+  }
+
+  .av4-tab {
+    padding: 14px 6px;
+    font-size: 11px;
+    border-radius: 12px;
+  }
+
+  .av4-catalog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .av4-select {
+    width: 100%;
+  }
+
+  .av4-item {
+    min-height: 170px;
+  }
+}

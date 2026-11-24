@@ -1,0 +1,65 @@
+
+.notification-bell {
+  position: relative;
+  overflow: visible;
+}
+
+.notification-bell-count {
+  position: absolute;
+  top: -5px;
+  right: -6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 20px;
+  height: 20px;
+
+  padding: 0 5px;
+
+  background: #ff3b30;
+  color: #ffffff;
+
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  pointer-events: none;
+
+  animation: notification-pop 0.25s ease;
+}
+
+.notification-bell-live {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  width: 9px;
+  height: 9px;
+
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+
+  background: #34c759;
+}
+
+@keyframes notification-pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notification-bell-count {
+    animation: none;
+  }
+}
